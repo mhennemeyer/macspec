@@ -1,6 +1,20 @@
 = MacSpec
 
-MacSpec is a feature minimal RSpec clone that is specifically built to work with MacRuby.
+MacSpec is a (yet) feature minimal RSpec clone that is specifically built to work with MacRuby.
+It is built ontop of MiniTest that ships with MacRuby and works out of the box with the MacRuby App 
+Template for Xcode. All you have to do is to replace two lines of code and start writing your tests.
+No special command for running tests required. Just set your active Target to Test and hit Cmd-B.
+
+MacSpec ships with a testing framework similar to RSpec's. 
+
+The matchy matcher system is built in. (->jmacanally)
+
+Even a mocking framework is built in.
+
+== Philosophy
+
+The highest priority feature will always be MacRuby compatibility. We will expand 
+the MacSpec's feature set  towards RSpec's  feature set step by step.
 
 == Copyright
 

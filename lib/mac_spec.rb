@@ -35,19 +35,19 @@ module MacSpec
     end
   end
 end
-MiniTest::Unit.autorun
-require 'macspec/matcher_system'
-require 'macspec/testing_framework'
-require 'macspec/mocking_framework'
+MiniTest::Unit.autorun unless defined?(MacSpecNoAutoRun)
+require 'mac_spec/matcher_system'
+require 'mac_spec/testing_framework'
+require 'mac_spec/mocking_framework'
 unless defined?(LOADED)
   # Track the current testcase and 
-  # provide it to the operator matchers.
-  # Otherwise operator expectations won't be counted
+  # provide it to the operator matchers and mocking framework.
+  # Otherwise expectations won't be counted as assertions
   MacSpec.test_case_class.class_eval do
-    alias_method :old_run_method_aliased_by_matchy, :run
+    alias_method :old_run_method_aliased_by_macspec, :run
     def run(whatever, *args, &block)
       $current_test_case = self
-      old_run_method_aliased_by_matchy(whatever, *args, &block)
+      old_run_method_aliased_by_macspec(whatever, *args, &block)
     end
   end
   LOADED = true

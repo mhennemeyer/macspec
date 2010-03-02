@@ -1,1 +1,1 @@
-require File.dirname(__FILE__) + '/../lib/macspec.rb'
+require File.dirname(__FILE__) + '/../lib/mac_spec.rb'

@@ -12,8 +12,10 @@
       if self.class.to_s == "Module"
         orig_block = block
         mod_context = self
+        #mods = self.ancestors.select {|m| m.class.to_s == "Module"}
         block = lambda {include mod_context; instance_eval(&orig_block)}
       end
+      cls.teardown_chained = lambda {MacSpec::MockingFramework::Mock.verify}
       cls.class_eval(&block)
       cls.testcases.each do |testcase|
         for test in cls.all_tests.reject {|t| testcase.own_tests.include?(t)}
