@@ -7,7 +7,7 @@ No special command for running tests required. Just set your active Target to Te
 
 MacSpec ships with a testing framework similar to RSpec's. 
 
-The matchy matcher system is built in. (->jmacanally)
+The matchy matcher system is built in. (-> http://github.com/jm/matchy)
 
 Even a mocking framework is built in.
 
