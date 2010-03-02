@@ -13,8 +13,7 @@ Even a mocking framework is built in.
 
 == Philosophy
 
-The highest priority feature will always be MacRuby compatibility. We will expand 
-the MacSpec's feature set  towards RSpec's  feature set step by step.
+The highest priority feature will always be MacRuby compatibility. We will expand MacSpec's feature set  towards RSpec's  feature set step by step.
 
 == Copyright
 
