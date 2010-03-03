@@ -19,7 +19,8 @@ $sudo macgem install MacSpec
 == Use
 
 
-For Starters: 
+For Starters:
+
 Create a brandnew  MacRuby Application with the Xcode template that ships with MacRuby.
 (Btw Have you installed MacRuby-0.5 already? http://www.macruby.org/downloads.html )
 
@@ -55,6 +56,8 @@ replace the content with:
       end
     end
   end
+  
+Now set the active target to 'Unit Tests' and hit Cmd-B.
 
 
 
