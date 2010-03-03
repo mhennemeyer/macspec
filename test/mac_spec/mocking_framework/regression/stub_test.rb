@@ -15,5 +15,12 @@ describe "Stubs" do
         end
       end
     end
+    
+    it "stub!(:meth)" do
+      obj = Object.new
+      obj.stub!(:meth)
+      lambda {obj.meth}.should_not raise_error
+    end
+    
   end
 end

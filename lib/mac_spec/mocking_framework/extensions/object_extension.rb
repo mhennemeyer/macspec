@@ -30,6 +30,7 @@ module MacSpec
       end
       
       def stub!(hash)
+        hash = {hash => nil} unless Hash === hash
         @__macspec__message_expectations ||= []
         hash.each do |meth_to_stub, ret_val|
           options = {

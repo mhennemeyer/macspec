@@ -13,7 +13,48 @@ Even a mocking framework is built in.
 
 == Install
 
+
 $sudo macgem install MacSpec
+
+== Use
+
+
+For Starters: 
+Create a brandnew  MacRuby Application with the Xcode template that ships with MacRuby.
+(Btw Have you installed MacRuby-0.5 already? http://www.macruby.org/downloads.html )
+
+Open the stub_test.rb file that is located inside the Tests group and 
+replace the content with:
+
+  require "rubygems"
+  require "MacSpec"
+
+  describe "MacSpec TestCase" do
+    before do
+      # This gets executed before each test. (Like setup)
+      # Instance variables that are declared 
+      # inside this block will be handed down to all
+      # tests.
+      @obj = Object.new
+    end
+    
+    after do
+      # you guess it!
+    end
+    
+    it "should work!" do
+      # this is the body of a test
+      @obj.should_receive(:hello).with("object").and_return("Hello MacSpec")
+      @obj.hello("object").should == "Hello MacSpec"
+    end
+    
+    describe "Nested TestCase" do
+      it "has access to the stuff that has been defined in the outer before blocks" do
+        @obj.stub!(:some_method)
+        lambda {@obj.some_method}.should_not raise_error
+      end
+    end
+  end
 
 
 
