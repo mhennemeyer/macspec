@@ -61,7 +61,17 @@ module MacSpec
             if (@received[args] && @positive) || (!@received[args] && !@positive)
               MacSpec.assert(true)
             elsif (!@received[args] && @positive)
-              err_msg = "'#{@receiver}' should have received '#{msg}' with '#{args_string}'."
+              received_with_args_string = if !@received.keys.include?(:__macspec_anyargs) 
+                 "not at all."
+               else
+                 @received.delete(:__macspec_anyargs)
+                 "#{@received.keys}"
+               end
+                
+              err_msg = """
+              '#{@receiver}' should have received '#{msg}' with '#{args_string}'.
+              But received it #{received_with_args_string}
+              """
               MacSpec.flunk err_msg
             elsif (@received[args] && !@positive)
               err_msg = "'#{@receiver}' should *not* have received '#{msg}' with '#{args_string}'."
@@ -77,7 +87,7 @@ module MacSpec
       end
       
       def negative?
-        
+        !@positive
       end
 
       def received_with_args!(args)
@@ -98,7 +108,7 @@ module MacSpec
         @return_value[args]
       end
 
-      def with_args(*args)
+      def with(*args)
         unless stub?
           @args_expectation = args
           @return_value[@args_expectation] = nil

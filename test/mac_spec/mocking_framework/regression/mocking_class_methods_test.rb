@@ -46,33 +46,33 @@ describe "Mocking existing methods" do
   
   describe "With one arg" do 
     it "will take a number" do
-      A.should_receive(:onearg).with_args(1).and_return("b")
+      A.should_receive(:onearg).with(1).and_return("b")
       A.onearg(1).should eql("b")
     end
     
     it "will take a string" do
-      A.should_receive(:onearg).with_args("string").and_return("b")
+      A.should_receive(:onearg).with("string").and_return("b")
       A.onearg("string").should eql("b")
     end
     
     it "will take an array" do
-      A.should_receive(:onearg).with_args([1,2,3]).and_return("b")
+      A.should_receive(:onearg).with([1,2,3]).and_return("b")
       A.onearg([1,2,3]).should eql("b")
     end
     
     it "will take an empty array" do
-      A.should_receive(:onearg).with_args([]).and_return("b")
+      A.should_receive(:onearg).with([]).and_return("b")
       A.onearg([]).should eql("b")
     end
     
     it "will take nil" do
-      A.should_receive(:onearg).with_args(nil).and_return("b")
+      A.should_receive(:onearg).with(nil).and_return("b")
       A.onearg(nil).should eql("b")
     end
     
     it "will take a custom object" do
       obj = Object.new
-      A.should_receive(:onearg).with_args(obj).and_return("b")
+      A.should_receive(:onearg).with(obj).and_return("b")
       A.onearg(obj).should eql("b")
     end
   end

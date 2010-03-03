@@ -36,6 +36,7 @@ module MacSpec
   end
 end
 MiniTest::Unit.autorun unless defined?(MacSpecNoAutoRun)
+require 'mac_spec/version'
 require 'mac_spec/matcher_system'
 require 'mac_spec/testing_framework'
 require 'mac_spec/mocking_framework'

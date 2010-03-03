@@ -1,9 +1,11 @@
 require 'rubygems'
 require 'rake'
+require 'lib/mac_spec/version.rb'
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
+    gem.version = MacSpec::VERSION
     gem.name = "MacSpec"
     gem.summary = %Q{MacSpec is a feature minimal RSpec clone that is specifically built to work with MacRuby.}
     gem.description = %Q{MacSpec is a feature minimal RSpec clone that is specifically built to work with MacRuby.}
