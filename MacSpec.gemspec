@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{MacSpec}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthias Hennemeyer"]
@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
     ".document",
      ".gitignore",
      "LICENSE",
+     "MacSpec.gemspec",
      "README.rdoc",
      "Rakefile",
-     "lib/mac_spec.rb",
      "lib/mac_spec/matcher_system.rb",
      "lib/mac_spec/matcher_system/built_in/change_expectations.rb",
      "lib/mac_spec/matcher_system/built_in/enumerable_expectations.rb",
@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
      "lib/mac_spec/testing_framework/core/kernel_extension.rb",
      "lib/mac_spec/testing_framework/core/test_case_class_methods.rb",
      "lib/mac_spec/version.rb",
+     "lib/macspec.rb",
      "test/all.rb",
      "test/mac_spec/matcher_system/built_in/change_expectations_test.rb",
      "test/mac_spec/matcher_system/built_in/enumerable_expectations_test.rb",
