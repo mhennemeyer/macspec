@@ -14,7 +14,7 @@ module Kernel
       #mods = self.ancestors.select {|m| m.class.to_s == "Module"}
       block = lambda {include mod_context; instance_eval(&orig_block)}
     end
-    cls.teardown_chained = lambda {MacSpec::MockingFramework::Mock.verify}
+    cls.teardown_chained = lambda {MacSpec::MockingFramework::MessageExpectation.verify}
     cls.macspec_superclass = super_class
     cls.class_eval(&block)
     cls.testcases.each do |testcase|

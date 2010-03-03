@@ -1,16 +1,59 @@
 module MacSpec
   module MockingFramework
     class MessageExpectation
-      attr_reader :msg, :return_value
-      def initialize(msg, receiver, positive)
-        @receiver = receiver
-        @msg = msg
-        @positive = positive
+      @register = []
+      attr_reader :msg, :return_value, :unique_alias
+      def initialize(options)
+        @receiver          = options[:receiver]
+        @msg               = options[:msg]
+        @positive          = options[:positive]
+        @stub              = options[:stub]
+        @stub_return_value = options[:stub_return_value]
+        
+        @unique_alias = "__macspec__alias_for_#{@msg}".to_sym
+        me = self
+        if respond_to?(@msg) && !respond_to?(@unique_alias)
+          # todo refactor to singletonclass.instance_eval
+          (class<<@receiver;self;end).send(:alias_method, @unique_alias, @msg)
+          (class<<@receiver;self;end).send(:define_method, @msg) do |*args|
+            received_args = args == [] ? nil : args
+            me.received_with_args!(received_args)
+            me.return_value_for_args(received_args)
+          end
+        elsif !respond_to?(@msg) && !respond_to?(@unique_alias)
+           (class<<@receiver;self;end).send(:define_method, me.msg) do |*args|
+             received_args = args == [] ? nil : args
+
+             me.received_with_args!(received_args)
+             me.return_value_for_args(received_args)
+           end
+        else
+          # 
+        end
+        MessageExpectation.register_for_verification(@receiver)
         @return_value = {}
         @received = {}
         @args_expectation = :__macspec_anyargs
       end
-
+      
+      def self.register_for_verification(obj)
+        @register << obj
+      end
+      
+      def self.register
+        @register
+      end
+      
+      def self.verify
+        begin
+          @register.uniq.each do |obj|
+            obj && obj.__macspec__verify
+          end
+        ensure
+          @register = []
+        end
+      end
+      
       def verify
         unless self.stub?
           @return_value.each do |args,value|
@@ -29,18 +72,12 @@ module MacSpec
         @return_value = {}
       end
       
-      def stub!(ret_val)
-        @return_value[:__macspec_anyargs] = ret_val
-        @stub = true
-        self
-      end
-      
       def stub?
         @stub
       end
       
-      def unique_alias
-        "__macspec__alias_for_#{@msg}".to_sym
+      def negative?
+        
       end
 
       def received_with_args!(args)
@@ -50,6 +87,7 @@ module MacSpec
       end
 
       def return_value_for_args(args)
+        return @stub_return_value if stub?
         args ||= :__macspec_anyargs
         received_args = @return_value.keys
         unless received_args.include?(args) || received_args.include?(:__macspec_anyargs)
@@ -61,13 +99,15 @@ module MacSpec
       end
 
       def with_args(*args)
-        @args_expectation = args
-        @return_value[@args_expectation] = nil
-        self
+        unless stub?
+          @args_expectation = args
+          @return_value[@args_expectation] = nil
+          self
+        end
       end
 
       def and_return(value)
-        if @positive
+        unless stub? || negative?
           @return_value[@args_expectation] = value
           self
         end
