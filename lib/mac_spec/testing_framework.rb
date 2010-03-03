@@ -5,3 +5,9 @@ $:.unshift(File.dirname(__FILE__)) unless
 require "testing_framework/core/test_case_class_methods"
 require "testing_framework/core/kernel_extension"
 require "testing_framework/core/functions"
+
+module MacSpec
+  module TestingFramework
+    # todo doc
+  end
+end

@@ -1,5 +1,5 @@
 module MacSpec
-  module Testing
+  module TestingFramework
     # The methods defined in this module are available
     # inside the TestCases.
     module TestCaseClassMethods
@@ -25,6 +25,14 @@ module MacSpec
       def all_tests
         @@_tests ||= []
       end
+      
+      def macspec_superclass
+        @macspec_superclass
+      end
+      
+      def macspec_superclass=(sc)
+        @macspec_superclass = sc
+      end
 
       # == Run before each Test.
       # The code in the block attached to this method will be run before each
@@ -48,11 +56,12 @@ module MacSpec
 
       # == Define a TestCase.
       def describe desc, &block
-        cls = Class.new($macspec_superclass) # todo no global here
+        cls = Class.new(macspec_superclass)
         mods = self.ancestors.reject {|m| Module === m }
         Object.const_set(self.name + desc.to_s.split(/\W+/).map { |s| s.capitalize }.join, cls)
         cls.setup_chained = self.setup_chained
         cls.teardown_chained = self.teardown_chained
+        cls.macspec_superclass = self.macspec_superclass
         cls.desc = self.desc + " " + desc
         cls.tests($1.constantize) if defined?(Rails) && 
           self.name =~ /^(.*(Controller|Helper|Mailer))Test/ && 
@@ -67,7 +76,7 @@ module MacSpec
       # == Define a test.
       def it desc, &block
         self.setup {}
-        desc = MacSpec::Testing::Functions.make_constantizeable(desc)
+        desc = MacSpec::TestingFramework::Functions.make_constantizeable(desc)
         if block_given?
           test = "test_#{desc.gsub(/\W+/, '_').downcase}"
           define_method(test, &lambda {$current_spec = self; instance_eval(&block)})

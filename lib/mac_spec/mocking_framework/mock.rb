@@ -13,6 +13,11 @@ module MacSpec
             Mock.new(:null_object, :null_object => true)
           end
         end
+        options[:stubs] && options[:stubs].each do |stub_method, return_value|
+          (class<<self;self;end).send(:define_method, stub_method) do |*args|
+            return_value
+          end
+        end
       end
 
       def self.mock_space
@@ -21,20 +26,30 @@ module MacSpec
 
       def self.verify
         @mock_space.each do |m|
-          m && m.verify
+          m && m.__verify
         end
         @mock_space = []
       end
 
-      def add_positive_message_expectation(msg)
+      def __add_positive_message_expectation(msg)
         @message_expectations[msg] ||= MessageExpectation.new(msg, @name, true) 
       end
 
-      def add_negative_message_expectation(msg)
+      def __add_negative_message_expectation(msg)
         @message_expectations[msg] ||= MessageExpectation.new(msg, @name, false)
       end
+      
+      def __add_stub(hash)
+        mes = []
+        hash.each do |msg, ret_val|
+          me = MessageExpectation.new(msg, @name, true)
+          me.stub!(ret_val)
+          mes << me
+        end
+        mes
+      end
 
-      def verify
+      def __verify
         begin
           @message_expectations.each do |msg, me| 
             me.verify

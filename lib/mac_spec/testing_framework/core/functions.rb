@@ -1,5 +1,5 @@
 module MacSpec
-  module Testing
+  module TestingFramework
     # == Temporary
     # A temporary module that holds functionality
     # that awaits to be refactored to the right place.
@@ -22,5 +22,5 @@ module MacSpec
         string
       end
     end # Functions
-  end # Testing
+  end # TestingFramework
 end #MacSpec

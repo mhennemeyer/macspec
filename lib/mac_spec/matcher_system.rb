@@ -11,3 +11,9 @@ require 'matcher_system/built_in/error_expectations'
 require 'matcher_system/built_in/truth_expectations'
 require 'matcher_system/built_in/operator_expectations'
 require 'matcher_system/built_in/change_expectations'
+
+module MacSpec
+  module MatcherSystem
+    # todo doc
+  end
+end

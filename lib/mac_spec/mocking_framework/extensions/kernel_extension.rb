@@ -2,7 +2,10 @@ module MacSpec
   module MockingFramework
     module KernelExtension
       def mock(name, options={})
-        MacSpec::MockingFramework::Mock.new(name, options)
+        mock_options = {}
+        mock_options[:null_object] = options.delete(:null_object)
+        mock_options[:stubs] = options
+        MacSpec::MockingFramework::Mock.new(name,mock_options)
       end
     end
   end

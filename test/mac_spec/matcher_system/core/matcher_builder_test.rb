@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-describe MacSpec::MatcherBuilder do
-  include MacSpec::MatcherBuilder
+describe MacSpec::MatcherSystem::MatcherBuilder do
+  include MacSpec::MatcherSystem::MatcherBuilder
 
   before do
     @obj = Object.new
