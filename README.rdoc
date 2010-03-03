@@ -11,6 +11,12 @@ The matchy matcher system is built in. (-> http://github.com/jm/matchy)
 
 Even a mocking framework is built in.
 
+== Install
+
+$sudo macgem install MacSpec
+
+
+
 == Philosophy
 
 The highest priority feature will always be MacRuby compatibility. We will expand MacSpec's feature set  towards RSpec's  feature set step by step.
