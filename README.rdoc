@@ -64,6 +64,18 @@ Now set the active target to 'Unit Tests' and hit Cmd-B.
 
 The highest priority feature will always be MacRuby compatibility. We will expand MacSpec's feature set  towards RSpec's  feature set step by step.
 
+== Features
+
+=== Lots of matchers
+
+=== A testing framework 
+
+With nested describe blocks, chained setup and teardown, fit and xit, shared_example_groups
+
+=== A mock framework
+
+With mock objects, method stubs and method expectations (aka partials)
+
 == Copyright
 
 Copyright (c) 2010 Matthias Hennemeyer. See LICENSE for details.
