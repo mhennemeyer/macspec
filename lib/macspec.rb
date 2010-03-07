@@ -39,6 +39,14 @@ module MacSpec
       @focused_tests
     end
     
+    def add_shared_example_group(name, block)
+      (@shared_example_groups ||= {}).update({name => block})
+    end
+    
+    def shared_example_group_for(name)
+      @shared_example_groups && @shared_example_groups[name]
+    end
+    
     def assertions_module
       MiniTest::Assertions
     end

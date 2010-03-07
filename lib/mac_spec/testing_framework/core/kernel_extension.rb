@@ -1,8 +1,13 @@
 
 module Kernel
+  
+  def shared_examples_for(sym, &block)
+    MacSpec.add_shared_example_group(sym, block)
+  end
+  
   def describe(*args, &block)
     super_class = (Hash === args.last && (args.last[:type] || args.last[:testcase])) || MacSpec.test_case_class 
-    super_class.class_eval {extend MacSpec::TestingFramework::TestCaseClassMethods}
+    super_class.class_eval {extend MacSpec::TestingFramework::TestCaseClassMethods} 
     cls = Class.new(super_class)
     cnst, desc = args
     cnst = MacSpec::TestingFramework::Functions.make_constantizeable(cnst)

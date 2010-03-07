@@ -37,7 +37,7 @@ module MacSpec
       # == Run before each Test.
       # The code in the block attached to this method will be run before each
       # test in all subsequent, eventually nested testcases.
-      def setup(&block)
+      def setup(type = :each, &block)
         passed_through_setup = self.setup_chained
         self.setup_chained = lambda { instance_eval(&passed_through_setup);instance_eval(&block) }
         define_method :setup, &self.setup_chained
@@ -47,7 +47,7 @@ module MacSpec
       # == Run after each Test.
       # The code in the block attached to this method will be run after each
       # test in all subsequent, eventually nested testcases.
-      def teardown(&block)
+      def teardown(type = :each, &block)
         passed_through_teardown = self.teardown_chained
         self.teardown_chained = lambda {instance_eval(&block);instance_eval(&passed_through_teardown) }
         define_method :teardown, &self.teardown_chained
@@ -82,6 +82,10 @@ module MacSpec
         end
         self.teardown {}
         test.to_sym
+      end
+      
+      def it_should_behave_like(sym)
+        class_eval(&MacSpec.shared_example_group_for(sym))
       end
       
       # == prepend 'f' to focus on a test

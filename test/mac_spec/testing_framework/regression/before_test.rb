@@ -17,7 +17,7 @@ describe "top level" do
       @horst = "NoHorst!"
     end
     
-    it "there should be NoHorst" do
+     it "there should be NoHorst" do
       @horst.should eql("NoHorst!")
     end
     

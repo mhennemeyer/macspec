@@ -67,3 +67,4 @@ The highest priority feature will always be MacRuby compatibility. We will expan
 == Copyright
 
 Copyright (c) 2010 Matthias Hennemeyer. See LICENSE for details.
+matchy is (c) 2008 Jeremy McAnally
