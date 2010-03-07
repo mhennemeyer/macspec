@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{MacSpec}
-  s.version = "0.3.3"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthias Hennemeyer"]
-  s.date = %q{2010-03-03}
+  s.date = %q{2010-03-07}
   s.description = %q{MacSpec is a feature minimal RSpec clone that is specifically built to work with MacRuby.}
   s.email = %q{mhennemeyer@me.com}
   s.extra_rdoc_files = [
