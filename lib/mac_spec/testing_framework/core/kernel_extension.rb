@@ -16,6 +16,7 @@ module Kernel
     end
     cls.teardown_chained = lambda {MacSpec::MockingFramework::MessageExpectation.verify}
     cls.macspec_superclass = super_class
+    MacSpec.add_test_case(cls)
     cls.class_eval(&block)
     cls.testcases.each do |testcase|
       for test in cls.all_tests.reject {|t| testcase.own_tests.include?(t)}

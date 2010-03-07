@@ -60,7 +60,6 @@ replace the content with:
 Now set the active target to 'Unit Tests' and hit Cmd-B.
 
 
-
 == Philosophy
 
 The highest priority feature will always be MacRuby compatibility. We will expand MacSpec's feature set  towards RSpec's  feature set step by step.

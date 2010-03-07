@@ -12,8 +12,6 @@ module MacSpec
         message_expectation = MacSpec::MockingFramework::MessageExpectation.new(options)
         @__macspec__message_expectations << message_expectation
         return message_expectation
-        # @__macspec__mock ||= MacSpec::MockingFramework::Mock.new(self.to_s, :belongs_to => self)
-        # __macspec__proxy_service(@__macspec__mock.__add_positive_message_expectation(msg))
       end
 
       def should_not_receive(msg)

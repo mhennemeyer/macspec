@@ -31,7 +31,7 @@ module MacSpec
           # 
         end
         MessageExpectation.register_for_verification(@receiver)
-        @return_value = {}
+        @return_value = {:__macspec_anyargs => true}
         @received = {}
         @args_expectation = :__macspec_anyargs
       end
@@ -59,6 +59,7 @@ module MacSpec
           @return_value.each do |args,value|
             args_string = (args == :__macspec_anyargs) ? "Any Args" : args.inspect
             if (@received[args] && @positive) || (!@received[args] && !@positive)
+              
               MacSpec.assert(true)
             elsif (!@received[args] && @positive)
               received_with_args_string = if !@received.keys.include?(:__macspec_anyargs) 

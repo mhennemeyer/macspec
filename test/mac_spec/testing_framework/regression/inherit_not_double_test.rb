@@ -7,7 +7,7 @@ describe "Prevent tests from beeing handed down" do
   
   $testcase = self
   it "does not inherit tests" do
-    $testcase.instance_methods.should_not include(:test_test_it)
+    $testcase.method_defined?(:test_test_it).should be(false)
   end
   
   it "doesn't make testname unusable" do
