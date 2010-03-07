@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{MacSpec}
-  s.version = "0.4.0"
+  s.version = "0.4.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthias Hennemeyer"]
@@ -72,6 +72,7 @@ Gem::Specification.new do |s|
      "test/mac_spec/testing_framework/regression/description_string_test.rb",
      "test/mac_spec/testing_framework/regression/example_name_test.rb",
      "test/mac_spec/testing_framework/regression/inherit_not_double_test.rb",
+     "test/mac_spec/testing_framework/regression/shared_examples_test.rb",
      "test/mac_spec/testing_framework/regression/surrounding_module_scope_test.rb",
      "test/mac_spec/testing_framework/regression/testing_functions_test.rb",
      "test/mac_spec/testing_framework/test_helper.rb",
@@ -110,6 +111,7 @@ Gem::Specification.new do |s|
      "test/mac_spec/testing_framework/regression/description_string_test.rb",
      "test/mac_spec/testing_framework/regression/example_name_test.rb",
      "test/mac_spec/testing_framework/regression/inherit_not_double_test.rb",
+     "test/mac_spec/testing_framework/regression/shared_examples_test.rb",
      "test/mac_spec/testing_framework/regression/surrounding_module_scope_test.rb",
      "test/mac_spec/testing_framework/regression/testing_functions_test.rb",
      "test/mac_spec/testing_framework/test_helper.rb",
