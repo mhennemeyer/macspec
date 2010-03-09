@@ -8,7 +8,7 @@ describe "Enumerable Expectations" do
   it "include fail" do
     lambda {
       [1,2,3,4].should include(6)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "exclude" do
@@ -18,7 +18,7 @@ describe "Enumerable Expectations" do
   it "exclude fail" do
     lambda {
       [1,2,3,4].should exclude(4)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "multi include" do
@@ -28,7 +28,7 @@ describe "Enumerable Expectations" do
   it "multi include fail" do
     lambda {
       [1,2,3,4].should include(6,7,8)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "multi exclude" do
@@ -38,7 +38,7 @@ describe "Enumerable Expectations" do
   it "multi exclude fail" do
     lambda {
       [1,2,3,4].should exclude(2,3,4)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative include" do
@@ -48,7 +48,7 @@ describe "Enumerable Expectations" do
   it "negative include fail" do
     lambda {
       [1,2,3,4].should_not include(4)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative exclude" do
@@ -58,7 +58,7 @@ describe "Enumerable Expectations" do
   it "negative exclude fail" do
     lambda {
       [1,2,3,4].should_not exclude(6,7)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "include fail message" do

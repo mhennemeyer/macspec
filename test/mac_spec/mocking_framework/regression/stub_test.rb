@@ -22,5 +22,13 @@ describe "Stubs" do
       lambda {obj.meth}.should_not raise_error
     end
     
+    it "stub!(:meth1 => 1, :meth2 => 2, :meth3 => 3)" do
+      obj = Object.new
+      obj.stub!(:meth1 => 1, :meth2 => 2, :meth3 => 3)
+      obj.meth1.should == 1
+      obj.meth2.should == 2
+      obj.meth3.should == 3
+    end
+    
   end
 end

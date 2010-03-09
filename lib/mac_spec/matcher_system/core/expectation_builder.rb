@@ -2,9 +2,16 @@ module MacSpec
   module MatcherSystem
     module ExpectationBuilder
       def self.build_expectation(match, exp, obj)
-        return MacSpec::MatcherSystem::Expectations::OperatorExpectation.new(obj, match) unless exp
+        unless exp
+          return MacSpec::MatcherSystem::Expectations::OperatorExpectation.new(obj, match) 
+        end
 
-        (exp.matches?(obj) != match) ? MacSpec.flunk(match ? exp.failure_message : exp.negative_failure_message) : MacSpec.assert(true)
+        if (exp.matches?(obj) != match) 
+          msg = match ? exp.failure_message : exp.negative_failure_message
+          MacSpec::Runtime.report_expectation_missed(msg)
+        else 
+          MacSpec::Runtime.report_expectation_met
+        end
       end
     end
   end

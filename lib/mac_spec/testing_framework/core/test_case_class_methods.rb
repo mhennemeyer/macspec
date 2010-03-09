@@ -65,17 +65,19 @@ module MacSpec
         mods = self.ancestors.select {|m| m.class.to_s == "Module" }
         orig_block = block
         block = lambda {include *mods; instance_eval(&orig_block)}
-        MacSpec.add_test_case(cls) 
+        MacSpec::UnitTestMapper.add_test_case(cls) 
         cls.class_eval(&block)
         self.testcases << cls
       end
 
       # == Define a test.
       def it desc, &block
+        # MacSpec::Example.create(:context => self, :desc => desc, :body => block)
         self.setup {}
         desc = MacSpec::TestingFramework::Functions.make_constantizeable(desc)
         if block_given?
           test = "test_#{desc.gsub(/\W+/, '_').downcase}"
+          test += "_" while method_defined?(test)
           define_method(test, &lambda {instance_eval(&block)})
           (@@_tests ||= []) << test.to_sym
           (@own_tests ||= []) << test.to_sym
@@ -85,12 +87,13 @@ module MacSpec
       end
       
       def it_should_behave_like(sym)
-        class_eval(&MacSpec.shared_example_group_for(sym))
+        # MacSpec::SharedExamples.
+        class_eval(&MacSpec::UnitTestMapper.shared_example_group_for(sym))
       end
       
       # == prepend 'f' to focus on a test
       def fit desc, &block
-        MacSpec.add_focused_test(self, self.it(desc, &block).to_sym)
+        MacSpec::UnitTestMapper.add_focused_test(self, self.it(desc, &block).to_sym)
       end
       
       # == prepend 'x' to ignore a test

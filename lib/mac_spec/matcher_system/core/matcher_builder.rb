@@ -6,7 +6,6 @@ module MacSpec
           block.call(actual, matcher, args)
         end
         body = lambda do |klass|
-          include MacSpec.assertions_module
           @matcher_name = matcher_name.to_s
           def self.matcher_name
             @matcher_name

@@ -29,13 +29,13 @@ describe "Truth Expectations" do
   it "equal fail" do
     lambda {
       3.should equal(4)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative equal fail" do
     lambda {
       3.should_not equal(3)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
 
   it "eql" do
@@ -53,13 +53,13 @@ describe "Truth Expectations" do
   it "eql fail" do
     lambda {
       3.should eql(13)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative eql fail" do
     lambda {
       3.should_not eql(3)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "exists" do
@@ -76,14 +76,14 @@ describe "Truth Expectations" do
     lambda {
       thing = Exister.new(false)
       thing.should exist
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative exists fail" do
     lambda {
       thing = Exister.new(true)
       thing.should_not exist
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "be" do
@@ -101,7 +101,7 @@ describe "Truth Expectations" do
   it "be fail" do
     lambda {
       true.should be(false)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "be close" do
@@ -115,13 +115,13 @@ describe "Truth Expectations" do
   it "be close fail" do
     lambda {
       (19.0 - 13.0).should be_close(33.04)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "be close with delta fail" do
     lambda {
       (19.0 - 13.0).should be_close(6.0, 0.0)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "satisfy" do
@@ -135,13 +135,13 @@ describe "Truth Expectations" do
   it "satisfy fail" do
     lambda {
       13.should satisfy(lambda {|i| i > 15})
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative satisfy fail" do
     lambda {
       13.should_not satisfy(lambda {|i| i < 15})
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "equal fail message" do
@@ -235,7 +235,7 @@ describe "Truth Expectations" do
   it "kind of fail" do
     lambda {
       3.should be_kind_of(Hash)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative kind of" do
@@ -245,7 +245,7 @@ describe "Truth Expectations" do
   it "negative kind of fail" do
     lambda {
       3.should_not be_kind_of(Fixnum)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
 
   it "respond to" do
@@ -255,7 +255,7 @@ describe "Truth Expectations" do
   it "respond to fail" do
     lambda {
       "foo".should respond_to(:nonexistant_method)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative respond to" do
@@ -265,7 +265,7 @@ describe "Truth Expectations" do
   it "negative respond to fail" do
     lambda {
       "foo".should_not respond_to(:length)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   # be_something
@@ -280,7 +280,7 @@ describe "Truth Expectations" do
     def @obj.something?
       false
     end
-    lambda {@obj.should be_something}.should raise_error(MacSpec.assertion_failed_error)
+    lambda {@obj.should be_something}.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative be something method missing pass" do
@@ -294,7 +294,7 @@ describe "Truth Expectations" do
     def @obj.something?
       true
     end
-    lambda {@obj.should_not be_something}.should raise_error(MacSpec.assertion_failed_error)
+    lambda {@obj.should_not be_something}.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "be something method missing fail message" do
@@ -331,7 +331,7 @@ describe "Truth Expectations" do
     def @obj.something?(arg)
       false
     end
-    lambda {@obj.should be_something(1)}.should raise_error(MacSpec.assertion_failed_error)
+    lambda {@obj.should be_something(1)}.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative be something method missing pass" do
@@ -345,7 +345,7 @@ describe "Truth Expectations" do
     def @obj.something?(arg)
       true
     end
-    lambda {@obj.should_not be_something(1)}.should raise_error(MacSpec.assertion_failed_error)
+    lambda {@obj.should_not be_something(1)}.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "be something method missing fail message" do

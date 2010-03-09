@@ -2,12 +2,13 @@
 module Kernel
   
   def shared_examples_for(sym, &block)
-    MacSpec.add_shared_example_group(sym, block)
+    MacSpec::UnitTestMapper.create_shared_examples(sym, block)
   end
   
   def describe(*args, &block)
-    super_class = (Hash === args.last && (args.last[:type] || args.last[:testcase])) || MacSpec.test_case_class 
+    super_class = (Hash === args.last && (args.last[:type] || args.last[:testcase])) || MacSpec::UnitTestMapper.test_case_class 
     super_class.class_eval {extend MacSpec::TestingFramework::TestCaseClassMethods} 
+    # MacSpec::SpecTestMapper.create_example_group(name: context: )
     cls = Class.new(super_class)
     cnst, desc = args
     cnst = MacSpec::TestingFramework::Functions.make_constantizeable(cnst)
@@ -21,7 +22,7 @@ module Kernel
     end
     cls.teardown_chained = lambda {MacSpec::MockingFramework::MessageExpectation.verify}
     cls.macspec_superclass = super_class
-    MacSpec.add_test_case(cls)
+    MacSpec::UnitTestMapper.add_test_case(cls)
     cls.class_eval(&block)
     cls.testcases.each do |testcase|
       for test in cls.all_tests.reject {|t| testcase.own_tests.include?(t)}

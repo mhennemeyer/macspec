@@ -60,7 +60,7 @@ module MacSpec
             args_string = (args == :__macspec_anyargs) ? "Any Args" : args.inspect
             if (@received[args] && @positive) || (!@received[args] && !@positive)
               
-              MacSpec.assert(true)
+              MacSpec::Runtime.report_expectation_met
             elsif (!@received[args] && @positive)
               received_with_args_string = if !@received.keys.include?(:__macspec_anyargs) 
                  "not at all."
@@ -73,10 +73,10 @@ module MacSpec
               '#{@receiver}' should have received '#{msg}' with '#{args_string}'.
               But received it #{received_with_args_string}
               """
-              MacSpec.flunk err_msg
+              MacSpec::Runtime.report_expectation_missed(err_msg)
             elsif (@received[args] && !@positive)
               err_msg = "'#{@receiver}' should *not* have received '#{msg}' with '#{args_string}'."
-              MacSpec.flunk err_msg
+              MacSpec::Runtime.report_expectation_missed(err_msg)
             end
           end
         end
@@ -104,7 +104,7 @@ module MacSpec
         unless received_args.include?(args) || received_args.include?(:__macspec_anyargs)
           args_string = args == :__macspec_anyargs ? "No Args" : args
           err_msg = "Wrong Argument(s): '#{args_string}' For message '#{msg}'. Receiver: '#{@receiver}'"
-          MacSpec.flunk err_msg
+          MacSpec::Runtime.report_expectation_missed(err_msg)
         end
         @return_value[args]
       end

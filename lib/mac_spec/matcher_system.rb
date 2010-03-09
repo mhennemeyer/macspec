@@ -36,7 +36,9 @@ require 'matcher_system/built_in/operator_expectations'
 require 'matcher_system/built_in/change_expectations'
 
 module MacSpec
+  # MacSpec ships with its own Matcher System, built on matchy.
+  # But you can also use RSpec (or MSpec) Matchers.
+  # A Matcher has to respond to matches?, failure_message and negative_failure_message.
   module MatcherSystem
-    # todo doc
   end
 end

@@ -8,7 +8,7 @@ describe "Error Expectations" do
   it "raises error fail" do
     lambda {
       lambda { "WIN" }.should raise_error
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative raises error" do
@@ -18,7 +18,7 @@ describe "Error Expectations" do
   it "negative raises error fail" do
     lambda {
       lambda { raise "FAIL" }.should_not raise_error
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "raises specific error" do
@@ -28,13 +28,13 @@ describe "Error Expectations" do
   it "raises specific error fail with no error" do
     lambda {
       lambda { "WIN" }.should raise_error(TypeError)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "raises specific error fail with different error" do
     lambda {
       lambda { raise StandardError }.should raise_error(TypeError)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "throws symbol" do
@@ -48,7 +48,7 @@ describe "Error Expectations" do
       lambda {
         throw :fail
       }.should throw_symbol(:win)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   end
   
   it "negative throws symbol" do
@@ -63,7 +63,7 @@ describe "Error Expectations" do
       lambda {
         throw :fail
       }.should_not throw_symbol(:fail)
-    }.should raise_error(MacSpec.assertion_failed_error)
+    }.should raise_error(MacSpec::UnitTestMapper.assertion_failed_error)
   
   end
   

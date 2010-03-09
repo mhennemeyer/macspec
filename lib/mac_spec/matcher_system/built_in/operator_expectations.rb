@@ -8,9 +8,8 @@ module MacSpec
       #   13.should == 13
       #   "hello".length.should_not == 2
       #
-      class OperatorExpectation #< Base
-        include ::MacSpec.assertions_module
-
+      class OperatorExpectation 
+        
         def initialize(receiver, match)
           @receiver, @match = receiver, match
         end
@@ -24,12 +23,12 @@ module MacSpec
 
         protected
         def pass!
-          MacSpec.assert(true)
+          MacSpec::Runtime.report_expectation_met
         end
 
         def fail!(operator)
           msg = @match ? failure_message(operator) : negative_failure_message(operator)
-          MacSpec.flunk msg
+          MacSpec::Runtime.report_expectation_missed(msg)
         end
 
         def failure_message(operator)
